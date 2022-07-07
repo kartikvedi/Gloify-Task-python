@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
+    <title>BookStore</title>
+</head>
+<body>
+    
+
+    <div class = "container">
+        <div class="AppName"> <div style="float:right;" class="hello-msg"><span style="padding-right: 30px; font-family: Verdana, Geneva, Tahoma, sans-serif;">Hello {{request.user}}</span><a style="display:inline-block"  href="{% url 'logout' %}">Logout</a></div>
+            <div ><h1><a style="display:inline-block" class='title' href="./"> BookStore</a></h1> </div>
+            
+        <form action="#" method="get">
+            <input type="text" name="mytextbox" />
+            <input type="Submit" class="btn" value="Search" name="search">
+        </form>
+        </div>
+        <div class="InventoryBooks">
+            {% if newbooks == undefined %}
+            {% for book in passdata %}
+                <div class="EveryBook">
+                    
+                    <h2><a href={{book.link}} target="_blank">{{book.title}} </a></h2>
+                    
+                    <p>ID: {{book.id}} with copies {{book.copies}}</p>
+                    {% if book.copies == 0 %}
+                    <form action="#" method="get">
+                        <input type="hidden" name="bookid" value="{{book.id}}">
+                        <input type="Submit" class="btn" style="background-color: #33ffd4; border: 4px solid #33ffd4;" value="Add" name="AddCopy" />
+                    </form>
+                    <b style="color: red;">Out of Stock</b>
+                    {% else %}
+                    <form action="#" method="get">
+                        <input type="hidden" name="bookid" value="{{book.id}}">
+                        <input type="Submit" class="btn" style="background-color: #33ffd4; border: 4px solid #33ffd4;" value="Add" name="AddCopy" />
+                        <input type="Submit" class="btn" style="background-color: red; border: 4px solid red;" value="Remove" name="Delete">
+                    </form>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            {% endif %}
+            {% for book in newbooks %}
+                <div class="EveryBook">
+                    <h2><a href={{book.link}} target="_blank">{{book.title}} </a></h2>
+                <p>ID: {{book.id}} </p>
+                {% if book.id in idlist %}
+                    <form action="#" method="get">
+                    <input type="hidden" name="bookid" value="{{book.id}}">
+                    <input type="Submit" class="btn" style="background-color: #33ffd4; border: 4px solid #33ffd4;" value="Add" name="AddCopy" />
+                    </form>
+                    <b style="color: rgb(107, 146, 107);"> It is already present in bookstore</b>
+                </br>
+                {% else %}
+                    <form action="#" method="get">
+                    <input type="hidden" name="bookid" value="{{book.id}}">
+                    <input type="hidden" name="booktitle" value="{{book.title}}">
+                    <input type="hidden" name="booklink" value="{{book.link}}">
+                    <input type="Submit" class="btn" style="background-color: #33ffd4; border: 4px solid #33ffd4;" value="Add" name="Add" />
+                    </form>
+                {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+</body>
+</html>

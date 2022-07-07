@@ -1,0 +1,31 @@
+.container{
+    width:75%;
+    background-color: whitesmoke;
+    margin: auto;
+    padding:30px;
+    align-items: center;
+}
+
+.AppName{
+    text-align: center;
+}
+
+.InventoryBooks{
+    width: 75%;
+    margin: auto;
+    align-items: center;
+    text-align: left;
+}
+
+.EveryBook{
+    width: 90%;
+    margin: auto;
+    border-bottom: 1px solid #cecece;
+}
+.title{
+    display:flex
+}
+.hello-msg{
+    display: flex;
+    float :right;
+}
